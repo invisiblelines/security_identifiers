@@ -22,7 +22,11 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+To validate an ISIN
+
+    ISIN::Validation.new('US0378331005').valid? # => true
+
+    ISIN::Validation.new('US0378331005').valid_format? # => true
 
 ## Contributing
 
