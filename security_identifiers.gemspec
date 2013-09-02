@@ -2,14 +2,14 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-require 'isin/version'
+require 'security_identifiers/version'
 
 Gem::Specification.new do |s|
-  s.name          = "isin"
-  s.version       = ISIN::VERSION
+  s.name          = "security_identifiers"
+  s.version       = SecurityIdentifiers::VERSION
   s.authors       = ["Kieran Johnson"]
   s.email         = ["hello@invisiblelines.com"]
-  s.summary       = %q{ISIN valiation library for Ruby}
+  s.summary       = %q{Security Identifier valiation library for Ruby}
   s.description   = s.summary
   s.homepage      = ""
   s.license       = "MIT"
@@ -21,4 +21,6 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "bundler", "~> 1.3"
   s.add_development_dependency "rake"
+
+  s.add_development_dependency "rspec", "~> 2.14.1"
 end

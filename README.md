@@ -1,16 +1,20 @@
-# ISIN
+# Security Identifiers
 
-ISIN validation library for Ruby.
+Security identifiers validation library for Ruby. 
+
+Currently supports
+• ISIN
+• CUSIP
 
 Validates:
 • Format
-• Checksum
+• Check Digit
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'isin'
+    gem 'security_identifiers'
 
 And then execute:
 
@@ -18,15 +22,32 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install isin
+    $ gem install security_identifiers
 
 ## Usage
 
 To validate an ISIN
 
-    ISIN::Validation.new('US0378331005').valid? # => true
+    isin = SecurityIdentifiers::ISIN::Validator.new('US0378331005')
+    isin.valid? # => true
 
-    ISIN::Validation.new('US0378331005').valid_format? # => true
+or
+
+    isin = SecurityIdentifiers::ISIN::Validator.new('S0378331005') # => raises SecurityIdentifiers::InvalidFormat
+
+To validate a CUSIP
+
+    cusip = SecurityIdentifiers::CUSIP::Validator.new('837649128')
+    cusip.valid? # => true
+
+## Rails
+
+Includes custom validators for use in ActiveRecord
+
+    class MyModel < ActiveRecord::Base
+      validates :isin, isin: true
+      validates :cusip, cusip: true
+    end
 
 ## Contributing
 
