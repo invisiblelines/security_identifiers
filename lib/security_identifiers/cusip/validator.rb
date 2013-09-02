@@ -16,7 +16,8 @@ module SecurityIdentifiers
 
       def check_digit
         @check ||= begin
-          values = odd_values.map { |i| i * 2 }.zip(even_values).flatten.join('').split('').map(&:to_i)
+          values = odd_values.map { |i| i * 2 }.zip(even_values).flatten
+
           values = values.inject(0) do |sum, i|
             sum += (i / 10) + i % 10
           end

@@ -15,9 +15,15 @@ module SecurityIdentifiers
       end
 
       def check_digit
-        longest, shortest = (even_values.last == digits.last ? [even_values, odd_values] : [odd_values, even_values])
-        longest           = longest.join('').split('').map(&:to_i).map { |i| i * 2 }
-        sum               = longest.concat(shortest).join('').split('').map(&:to_i).inject(&:+)
+        longest, shortest = if even_values.last == digits.last
+           [even_values, odd_values]
+        else
+          [odd_values, even_values]
+        end
+
+        longest           = longest.map { |i| i * 2 }
+        values            = (longest.concat(shortest)).to_s.scan(/./).map(&:to_i)
+        sum               = values.inject(&:+)
         
         (10 - (sum % 10)) % 10
       end
