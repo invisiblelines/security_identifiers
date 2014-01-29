@@ -1,10 +1,11 @@
 require 'security_identifiers/version'
-require 'security_identifiers/base_validator'
-require 'security_identifiers/isin/validator'
-require 'security_identifiers/cusip/validator'
+require 'security_identifiers/base'
+require 'security_identifiers/isin'
+require 'security_identifiers/cusip'
+require 'security_identifiers/sedol'
 
-require 'security_identifiers/railtie' if defined?(Rails)
-
-module SecurityIdentifiers
-
+if defined?(ActiveModel)
+  require 'security_identifiers/validations/isin_validator'
+  require 'security_identifiers/validations/cusip_validator'
+  require 'security_identifiers/validations/sedol_validator'
 end

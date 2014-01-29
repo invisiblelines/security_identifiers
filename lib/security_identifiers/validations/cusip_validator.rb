@@ -1,18 +1,18 @@
 module SecurityIdentifiers
   
-  module ISIN
+  module Validations
 
-    class Validation < ActiveModel::EachValidator
+    class CusipValidator < ActiveModel::EachValidator
 
       def validate_each(record, attribute, value)
         begin
-          isin = ISIN.new(value)
+          cusip = CUSIP.new(value)
+
+          unless cusip.valid?
+            record.errors[attribute] << 'does not have a valid check digit'
+          end
         rescue SecurityIdentifiers::InvalidFormat
           record.errors[attribute] << 'is not in the correct format'
-        end
-
-        unless isin.valid?
-          record.errors[attribute] << 'does not have a valid check digit'
         end
       end
 
