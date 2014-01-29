@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version       = SecurityIdentifiers::VERSION
   s.authors       = ["Kieran Johnson"]
   s.email         = ["hello@invisiblelines.com"]
-  s.summary       = %q{Security Identifier valiation library for Ruby}
+  s.summary       = %q{Security Identifier validation library for Ruby}
   s.description   = s.summary
   s.homepage      = ""
   s.license       = "MIT"
