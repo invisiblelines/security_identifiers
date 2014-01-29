@@ -1,15 +1,20 @@
 # Security Identifiers
 
+[![Build Status](https://travis-ci.org/invisiblelines/security_identifiers.png?branch=master)](https://travis-ci.org/invisiblelines/security_identifiers)
+[![Code Climate](https://codeclimate.com/github/invisiblelines/security_identifiers.png)](https://codeclimate.com/github/invisiblelines/security_identifiers)
+
 Security identifiers validation library for Ruby. 
 
 Currently supports
-• ISIN
-• CUSIP
-• SEDOL
+
+- ISIN
+- CUSIP
+- SEDOL
 
 Validates:
-• Format
-• Check Digit
+
+-  Format
+-  Check Digit
 
 ## Installation
 
