@@ -5,6 +5,7 @@ Security identifiers validation library for Ruby.
 Currently supports
 • ISIN
 • CUSIP
+• SEDOL
 
 Validates:
 • Format
@@ -28,23 +29,36 @@ Or install it yourself as:
 
 To validate an ISIN
 
-    isin = SecurityIdentifiers::ISIN::Validator.new('US0378331005')
+    isin = SecurityIdentifiers::ISIN.new('US0378331005')
     isin.valid? # => true
 
-or
+or with an invalid identifier
 
-    isin = SecurityIdentifiers::ISIN::Validator.new('S0378331005') # => raises SecurityIdentifiers::InvalidFormat
+    isin = SecurityIdentifiers::ISIN.new('S0378331005') # => raises SecurityIdentifiers::InvalidFormat
 
-To validate a CUSIP
+To fix a missing check digit
 
-    cusip = SecurityIdentifiers::CUSIP::Validator.new('837649128')
-    cusip.valid? # => true
+    isin = SecurityIdentifiers::ISIN.new('US037833100')
+    isin.fix! 
 
-## Rails
+Now you can validate
 
-Includes custom validators for use in ActiveRecord
+    isin.valid? # => true
+
+The same method apply to CUSIPs and SEDOLs.
+
+CUSIPs and SEDOLs also support converting these identifiers to ISINs.
+
+    cusip = SecurityIdentifiers::CUSIP.new('125509BG3')
+    cusip.to_isin('US') # => SecurityIdentifiers::ISIN
+
+## ActiveModel Validations
+
+Includes custom validators for use in ActiveModel/ActiveRecord
 
     class MyModel < ActiveRecord::Base
+      include SecurityIdentifiers::Validators
+    
       validates :isin, isin: true
       validates :cusip, cusip: true
     end
