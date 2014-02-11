@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/invisiblelines/security_identifiers.png?branch=master)](https://travis-ci.org/invisiblelines/security_identifiers)
 [![Code Climate](https://codeclimate.com/github/invisiblelines/security_identifiers.png)](https://codeclimate.com/github/invisiblelines/security_identifiers)
+[![Dependency Status](https://gemnasium.com/invisiblelines/security_identifiers.png)](https://gemnasium.com/invisiblelines/security_identifiers)
 
 Security identifiers validation library for Ruby. 
 
