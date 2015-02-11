@@ -43,11 +43,6 @@ or with an invalid identifier
 
     isin = SecurityIdentifiers::ISIN.new('S0378331005') # => raises SecurityIdentifiers::InvalidFormat
 
-To fix a missing check digit
-
-    isin = SecurityIdentifiers::ISIN.new('US037833100')
-    isin.fix!
-
 Now you can validate
 
     isin.valid? # => true
@@ -63,12 +58,23 @@ CUSIPs and SEDOLs also support converting these identifiers to ISINs.
 
 Includes custom validators for use in ActiveModel/ActiveRecord
 
-    class MyModel < ActiveRecord::Base
-      include SecurityIdentifiers::Validators
+    class Security
+      include ActiveModel::Validations
+      include SecurityIdentifiers::Validations
 
-      validates :isin, isin: true
-      validates :cusip, cusip: true
+      attr_accessor :cusip, :isin, :sedol
+
+      def initialize(options = {})
+        @cusip = options[:cusip]
+        @isin  = options[:isin]
+        @sedol = options[:sedol]
+      end
+
+      validates :cusip, cusip: true, allow_blank: true
+      validates :isin,  isin:  true, allow_blank: true
+      validates :sedol, sedol: true, allow_blank: true
     end
+
 
 ## Contributing
 
