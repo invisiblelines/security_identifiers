@@ -3,8 +3,9 @@
 [![Build Status](https://travis-ci.org/invisiblelines/security_identifiers.png?branch=master)](https://travis-ci.org/invisiblelines/security_identifiers)
 [![Code Climate](https://codeclimate.com/github/invisiblelines/security_identifiers.png)](https://codeclimate.com/github/invisiblelines/security_identifiers)
 [![Dependency Status](https://gemnasium.com/invisiblelines/security_identifiers.png)](https://gemnasium.com/invisiblelines/security_identifiers)
+[![Gem Version](https://badge.fury.io/rb/security_identifiers.svg)](http://badge.fury.io/rb/security_identifiers)
 
-Security identifiers validation library for Ruby. 
+Security identifiers validation library for Ruby.
 
 Currently supports
 
@@ -45,7 +46,7 @@ or with an invalid identifier
 To fix a missing check digit
 
     isin = SecurityIdentifiers::ISIN.new('US037833100')
-    isin.fix! 
+    isin.fix!
 
 Now you can validate
 
@@ -64,7 +65,7 @@ Includes custom validators for use in ActiveModel/ActiveRecord
 
     class MyModel < ActiveRecord::Base
       include SecurityIdentifiers::Validators
-    
+
       validates :isin, isin: true
       validates :cusip, cusip: true
     end
