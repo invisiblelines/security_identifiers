@@ -15,10 +15,6 @@ module SecurityIdentifiers
       "#{@identifier}#{check_digit}"
     end
 
-    def fix!
-      @original_check_digit = check_digit
-    end
-
     private
 
       def digits
@@ -31,6 +27,10 @@ module SecurityIdentifiers
 
       def odd_values
         @odd_values ||= digits.values_at(* digits.each_index.select { |i| i.odd? })
+      end
+
+      def fix!
+        @original_check_digit = check_digit
       end
 
   end
