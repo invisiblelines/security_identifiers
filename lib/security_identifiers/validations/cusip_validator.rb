@@ -1,5 +1,5 @@
 module SecurityIdentifiers
-  
+
   module Validations
 
     class CusipValidator < ActiveModel::EachValidator

@@ -4,7 +4,7 @@ module SecurityIdentifiers
 
     def initialize(str)
       raise InvalidFormat if str.nil?
-      
+
       match_data = str.upcase.match(/^([A-Z0-9]{8})(\d{1})?$/)
 
       raise InvalidFormat if match_data.nil?

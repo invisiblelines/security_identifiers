@@ -4,7 +4,7 @@ describe Validations::SedolValidator do
 
   context 'without sedol' do
     subject { Security.new(sedol: 'BOWN') }
-    
+
     it 'is invalid' do
       expect(subject).not_to be_valid
     end

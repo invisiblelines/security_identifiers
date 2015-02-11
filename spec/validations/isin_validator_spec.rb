@@ -4,7 +4,7 @@ describe Validations::IsinValidator do
 
   context 'without isin' do
     subject { Security.new(isin: 'US03783310') }
-    
+
     it 'is invalid' do
       expect(subject).not_to be_valid
     end

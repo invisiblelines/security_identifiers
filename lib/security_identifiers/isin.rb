@@ -4,7 +4,7 @@ module SecurityIdentifiers
 
     def initialize(str)
       raise InvalidFormat if str.nil?
-      
+
       match_data = str.upcase.match(/^(([A-Z]{2})([A-Z0-9]{9}))(\d{1})?$/)
 
       raise InvalidFormat if match_data.nil?
@@ -22,7 +22,7 @@ module SecurityIdentifiers
       longest = longest.map { |i| i * 2 }
       values  = (longest.concat(shortest)).to_s.scan(/./).map(&:to_i)
       sum     = values.inject(&:+)
-      
+
       (10 - (sum % 10)) % 10
     end
 

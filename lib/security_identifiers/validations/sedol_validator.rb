@@ -1,5 +1,5 @@
 module SecurityIdentifiers
-  
+
   module Validations
 
     class SedolValidator < ActiveModel::EachValidator

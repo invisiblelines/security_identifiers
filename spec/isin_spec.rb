@@ -17,7 +17,7 @@ describe ISIN do
       expect(isin).to_not be_valid
     end
   end
-  
+
   context 'Valid numeric ISIN' do
     let(:isin) { ISIN.new('US0378331005') }
 
