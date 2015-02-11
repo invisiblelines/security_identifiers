@@ -10,6 +10,8 @@ module SecurityIdentifiers
       raise InvalidFormat if match_data.nil?
 
       @identifier, @original_check_digit = match_data.captures
+
+      fix! if @original_check_digit.nil?
     end
 
     def check_digit

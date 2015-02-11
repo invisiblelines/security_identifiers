@@ -9,8 +9,8 @@ describe SEDOL do
   context 'Without a check digit' do
     let(:sedol) { SEDOL.new('B0WNLY') }
 
-    it 'is invalid' do
-      expect(sedol).to_not be_valid
+    it 'calculates the check digit' do
+      expect(sedol.original_check_digit).to_not be_nil
     end
   end
 
@@ -47,14 +47,6 @@ describe SEDOL do
 
     it 'returns the whole identifier' do
       expect(sedol.to_s).to eql('B0WNLY7')
-    end
-  end
-
-  context '#fix!' do
-    let(:sedol) { SEDOL.new('B0WNLY') }
-
-    it 'calculates the check digit' do
-      expect { sedol.fix! }.to change(sedol, :original_check_digit).from(nil).to(7)
     end
   end
 

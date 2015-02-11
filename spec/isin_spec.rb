@@ -13,8 +13,8 @@ describe ISIN do
   context 'Without a check digit' do
     let(:isin) { ISIN.new('US037833100') }
 
-    it 'is invalid' do
-      expect(isin).to_not be_valid
+    it 'calculates the check digit' do
+      expect(isin.original_check_digit).not_to be_nil
     end
   end
 
@@ -55,14 +55,6 @@ describe ISIN do
 
     it 'returns the whole identifier' do
       expect(isin.to_s).to eql('AU0000XVGZA3')
-    end
-  end
-
-  context '#fix!' do
-    let(:isin) { ISIN.new('AU0000XVGZA') }
-
-    it 'calculates the check digit' do
-      expect { isin.fix! }.to change(isin, :original_check_digit).from(nil).to(3)
     end
   end
 

@@ -9,8 +9,8 @@ describe CUSIP do
   context 'Without a check digit' do
     let(:cusip) { CUSIP.new('83764912') }
 
-    it 'is invalid' do
-      expect(cusip).to_not be_valid
+    it 'calculates the check digit' do
+      expect(cusip.original_check_digit).to_not be_nil
     end
   end
 
@@ -67,14 +67,6 @@ describe CUSIP do
 
     it 'returns the whole identifier' do
       expect(cusip.to_s).to eql('125509BG3')
-    end
-  end
-
-  context '#fix!' do
-    let(:cusip) { CUSIP.new('125509BG') }
-
-    it 'calculates the check digit' do
-      expect { cusip.fix! }.to change(cusip, :original_check_digit).from(nil).to(3)
     end
   end
 
