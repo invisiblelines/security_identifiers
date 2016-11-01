@@ -14,18 +14,26 @@ module SecurityIdentifiers
       fix! if @original_check_digit.nil?
     end
 
-    def check_digit
-      longest, shortest = if odd_values.length == even_values.length
-        [odd_values, even_values]
+    def digits_for c
+      @@digits_cache ||= {}
+      @@digits_cache[c] ||= if c[/\d/]
+	c.to_i
       else
-        [even_values, odd_values]
+	ord = c.ord - 55
+	[ord/10, ord%10]
       end
+    end
 
-      longest = longest.map { |i| i * 2 }
-      values  = (longest.concat(shortest)).to_s.scan(/./).map(&:to_i)
-      sum     = values.inject(&:+)
-
-      (10 - (sum % 10)) % 10
+    def check_digit
+      # ISIN Orgnization algorithm (http://www.isin.org/education/)
+      # NB.  Digits are reversed because even/odd is counted starting with the rightmost character
+      digits_digits = @identifier.chars.collect{|c| digits_for(c)}.flatten.reverse
+      odd_digits  = digits_digits.values_at(* digits_digits.each_index.select {|i| i.odd?})
+      even_digits = digits_digits.values_at(* digits_digits.each_index.select {|i| i.even?})
+      even_digits_doubled = even_digits.collect{|d| d >= 5 ? [1, (d-5)*2] : d*2 }.flatten
+      sum   = (odd_digits + even_digits_doubled).inject(&:+)
+      value = 10 * ((sum+9)/10) 		# parentheses matter!
+      value - sum
     end
 
     protected

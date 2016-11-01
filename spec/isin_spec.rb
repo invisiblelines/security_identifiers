@@ -42,6 +42,18 @@ describe ISIN do
     end
   end
 
+  context 'Regression alphanumeric ISIN' do
+    let(:isin) { ISIN.new('CA26210W1005') }
+
+    it 'calculates the check digit' do
+      expect(isin.check_digit).to eql(5)
+    end
+
+    it 'validates the check digit' do
+      expect(isin).to be_valid
+    end
+  end
+
   context 'Valid alphanumeric ISIN ETF' do
     let(:isin) { ISIN.new('IE00B3RBWM25') }
 
