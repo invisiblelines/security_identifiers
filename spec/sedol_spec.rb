@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe SEDOL do
-
   it 'is invalid without 6 character alpha-numeric identifier' do
     expect { SEDOL.new('B0WNL') }.to raise_error(SecurityIdentifiers::InvalidFormat)
   end
@@ -49,5 +48,4 @@ describe SEDOL do
       expect(sedol.to_s).to eql('B0WNLY7')
     end
   end
-
 end

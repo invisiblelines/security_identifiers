@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe ISIN do
-
   it 'is invalid without a country code' do
     expect { ISIN.new('120378331004') }.to raise_error(SecurityIdentifiers::InvalidFormat)
   end
@@ -89,5 +88,4 @@ describe ISIN do
       expect(isin.to_s).to eql('AU0000XVGZA3')
     end
   end
-
 end

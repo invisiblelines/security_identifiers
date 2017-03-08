@@ -1,0 +1,2 @@
+inherit_from:
+  - https://raw.githubusercontent.com/invisiblelines/style-guide/master/ruby/.rubocop.yml

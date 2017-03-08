@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Validations::IsinValidator do
-
   context 'without isin' do
     subject { Security.new(isin: 'US03783310') }
 
@@ -17,5 +16,4 @@ describe Validations::IsinValidator do
       expect(subject).to be_valid
     end
   end
-
 end

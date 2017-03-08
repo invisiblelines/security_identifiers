@@ -24,6 +24,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'activemodel'
   s.add_development_dependency 'guard', '2.12.1'
   s.add_development_dependency 'guard-rspec', '4.5.0'
-
   s.add_development_dependency 'rspec', '~> 3.2.0'
+  s.add_development_dependency 'rubocop', '0.47.1'
 end

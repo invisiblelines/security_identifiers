@@ -1,7 +1,5 @@
 module SecurityIdentifiers
-
   class CUSIP < Base
-
     def initialize(str)
       raise InvalidFormat if str.nil?
 
@@ -18,18 +16,16 @@ module SecurityIdentifiers
       values = odd_values.map { |i| i * 2 }.zip(even_values).flatten
 
       values = values.inject(0) do |sum, i|
-        sum += (i / 10) + i % 10
+        sum + (i / 10) + i % 10
       end
 
       ((10 - values) % 10) % 10
     end
 
     def to_isin(iso = 'US')
-      raise InvalidConversion if !['US', 'CA'].include?(iso)
+      raise InvalidConversion unless %w(US CA).include?(iso)
 
       ISIN.new([iso, @identifier, check_digit].join)
     end
-
   end
-
 end

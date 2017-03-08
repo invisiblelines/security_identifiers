@@ -1,7 +1,5 @@
 module SecurityIdentifiers
-
   class SEDOL < Base
-
     def initialize(str)
       raise InvalidFormat if str.nil?
 
@@ -25,12 +23,16 @@ module SecurityIdentifiers
       (10 - sum % 10) % 10
     end
 
-    def to_isin(iso='GB')
-      raise InvalidConversion if !['GB', 'IE'].include?(iso)
+    def to_isin(iso = 'GB')
+      raise InvalidConversion unless %w(GB IE).include?(iso)
 
       ISIN.new([iso, '00', @identifier, check_digit].join)
     end
 
-  end
+    private
 
+    def digits_for(char)
+      char =~ /[A-Z]/ ? (char.ord - 55) : char.to_i
+    end
+  end
 end

@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe CUSIP do
-
   it 'is invalid without 8 character alpha-numeric identifier' do
     expect { CUSIP.new('5509BG3') }.to raise_error(SecurityIdentifiers::InvalidFormat)
   end
@@ -69,5 +68,4 @@ describe CUSIP do
       expect(cusip.to_s).to eql('125509BG3')
     end
   end
-
 end
