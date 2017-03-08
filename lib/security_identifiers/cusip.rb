@@ -13,13 +13,13 @@ module SecurityIdentifiers
     end
 
     def check_digit
-      values = odd_values.map { |i| i * 2 }.zip(even_values).flatten
+      values = even_values.map { |i| i * 2 }.zip(odd_values).flatten
 
-      values = values.inject(0) do |sum, i|
-        sum + (i / 10) + i % 10
+      sum = values.inject(0) do |result, i|
+        result + (i / 10) + i % 10
       end
 
-      ((10 - values) % 10) % 10
+      mod_10(sum)
     end
 
     def to_isin(iso = 'US')

@@ -15,20 +15,31 @@ module SecurityIdentifiers
 
     private
 
+    def digits_for(char)
+      return char.to_i unless char =~ /[A-Z]/
+
+      ord = char.to_i(36)
+      [ord / 10, ord % 10]
+    end
+
     def digits
-      @digits ||= @identifier.split('').map { |i| i =~ /[A-Z]/ ? (i.ord - 55) : i.to_i }
+      @digits ||= @identifier.each_char.flat_map { |char| digits_for(char) }
     end
 
     def even_values
-      @even_values ||= digits.values_at(* digits.each_index.select(&:even?))
+      @even_values ||= digits.select.with_index(1) { |digit, i| i.even? && digit }
     end
 
     def odd_values
-      @odd_values ||= digits.values_at(* digits.each_index.select(&:odd?))
+      @odd_values ||= digits.select.with_index(1) { |digit, i| i.odd? && digit }
     end
 
     def fix!
       @original_check_digit = check_digit
+    end
+
+    def mod_10(sum)
+      (10 - sum % 10) % 10
     end
   end
 end

@@ -1,5 +1,7 @@
 module SecurityIdentifiers
   class SEDOL < Base
+    WEIGHTS = [1, 3, 1, 7, 3, 9, 1].freeze
+
     def initialize(str)
       raise InvalidFormat if str.nil?
 
@@ -13,14 +15,11 @@ module SecurityIdentifiers
     end
 
     def check_digit
-      weights = [1, 3, 1, 7, 3, 9, 1]
-      sum     = 0
-
-      digits.each_with_index do |i, idx|
-        sum += weights[idx] * i
+      sum = digits.each_with_index.inject(0) do |result, (i, idx)|
+        result + WEIGHTS[idx] * i
       end
 
-      (10 - sum % 10) % 10
+      mod_10(sum)
     end
 
     def to_isin(iso = 'GB')
@@ -32,7 +31,7 @@ module SecurityIdentifiers
     private
 
     def digits_for(char)
-      char =~ /[A-Z]/ ? (char.ord - 55) : char.to_i
+      char =~ /[A-Z]/ ? char.to_i(36) : char.to_i
     end
   end
 end

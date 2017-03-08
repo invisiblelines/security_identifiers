@@ -12,26 +12,23 @@ module SecurityIdentifiers
       fix! if @original_check_digit.nil?
     end
 
-    def digits_for(char)
-      return char.to_i unless char =~ /[A-Z]/
-
-      ord = char.to_i(36)
-      [ord / 10, ord % 10]
-    end
-
     def check_digit
-      # ISIN Orgnization algorithm (http://www.isin.org/education/)
-      # NB.  Digits are reversed because even/odd is counted starting with the rightmost character
-      even_digits_doubled = even_values.collect { |d| d >= 5 ? [1, (d - 5) * 2] : d * 2 }.flatten
-      sum                 = (odd_values + even_digits_doubled).inject(&:+)
-      value               = 10 * ((sum + 9) / 10)
-      value - sum
+      first_group, second_group = digit_groups
+      first_group.map! { |d| d * 2 }
+
+      sum = (first_group + second_group).join.each_char.inject(0) { |result, i| result + i.to_i }
+
+      mod_10(sum)
     end
 
-    protected
+    private
 
-    def digits
-      @digits ||= super.join('').split('').map(&:to_i).reverse
+    def digit_groups
+      if digits.size.even?
+        [even_values, odd_values]
+      else
+        [odd_values, even_values]
+      end
     end
   end
 end
