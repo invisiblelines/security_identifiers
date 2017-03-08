@@ -5,19 +5,19 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'security_identifiers/version'
 
 Gem::Specification.new do |s|
-  s.name          = "security_identifiers"
+  s.name          = 'security_identifiers'
   s.version       = SecurityIdentifiers::VERSION
-  s.authors       = ["Kieran Johnson"]
-  s.email         = ["hello@invisiblelines.com"]
-  s.summary       = %q{Security Identifier validation library for Ruby}
-  s.description   = s.summary
-  s.homepage      = ""
-  s.license       = "MIT"
+  s.authors       = ['Kieran Johnson']
+  s.email         = ['hello@invisiblelines.com']
+  s.summary       = 'Security Identifier validation library for Ruby'
+  s.description   = 'Validate ISIN, CUSIP and SEDOL codes'
+  s.homepage      = 'https://github.com/invisiblelines/security_identifiers'
+  s.license       = 'MIT'
 
-  s.files         = `git ls-files`.split($/)
+  s.files         = `git ls-files`.split($RS)
   s.executables   = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
   s.test_files    = s.files.grep(%r{^(test|spec|features)/})
-  s.require_paths = ["lib"]
+  s.require_paths = ['lib']
 
   s.add_development_dependency 'bundler', '~> 1.3'
   s.add_development_dependency 'rake', '~> 12.0', '>= 12.0.0'
