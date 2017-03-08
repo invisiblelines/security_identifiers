@@ -47,7 +47,7 @@ Now you can validate
 
     isin.valid? # => true
 
-The same method apply to CUSIPs and SEDOLs.
+The same method applies to CUSIPs and SEDOLs.
 
 CUSIPs and SEDOLs also support converting these identifiers to ISINs.
 
