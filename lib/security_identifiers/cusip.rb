@@ -1,9 +1,15 @@
 module SecurityIdentifiers
   class CUSIP < Base
+    SYMBOLS = {
+      '*' => [3, 6],
+      '@' => [3, 7],
+      '#' => [3, 8]
+    }.freeze
+
     def initialize(str)
       raise InvalidFormat if str.nil?
 
-      match_data = str.upcase.match(/^([A-Z0-9]{8})(\d{1})?$/)
+      match_data = str.upcase.match(/^([A-Z0-9\*@#]{8})(\d{1})?$/)
 
       raise InvalidFormat if match_data.nil?
 
@@ -26,6 +32,14 @@ module SecurityIdentifiers
       raise InvalidConversion unless %w(US CA).include?(iso)
 
       ISIN.new([iso, @identifier, check_digit].join)
+    end
+
+    private
+
+    def digits_for(char)
+      return SYMBOLS[char] if SYMBOLS.key?(char)
+
+      super
     end
   end
 end

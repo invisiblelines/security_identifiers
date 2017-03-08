@@ -37,6 +37,18 @@ describe CUSIP do
     end
   end
 
+  context 'Valid PPN codes' do
+    let(:cusip) { CUSIP.new('00800*AA6') }
+
+    it 'calculates the check digit' do
+      expect(cusip.check_digit).to eql(cusip.original_check_digit.to_i)
+    end
+
+    it 'validates the check digit' do
+      expect(cusip).to be_valid
+    end
+  end
+
   context 'Invalid check digit' do
     let(:cusip) { CUSIP.new('125509BG4') }
 
