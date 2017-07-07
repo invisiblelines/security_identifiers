@@ -13,12 +13,14 @@ module SecurityIdentifiers
     end
 
     def check_digit
-      first_group, second_group = digit_groups
-      first_group.map! { |d| d * 2 }
+      @check_digit ||= begin
+        first_group  = digit_groups[0].map { |d| d * 2 }
+        second_group = digit_groups[1]
 
-      sum = (first_group + second_group).join.each_char.inject(0) { |result, i| result + i.to_i }
+        sum = (first_group + second_group).join.each_char.inject(0) { |result, i| result + i.to_i }
 
-      mod_10(sum)
+        mod_10(sum)
+      end
     end
 
     private

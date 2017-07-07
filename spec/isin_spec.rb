@@ -27,6 +27,13 @@ describe ISIN do
     it 'validates the check digit' do
       expect(isin).to be_valid
     end
+
+    it 'generates consistent check digit' do
+      cd1 = ISIN.new('XS1294343337').check_digit
+      cd2 = ISIN.new('XS1294343337').check_digit
+
+      expect(cd1).to eq(cd2)
+    end
   end
 
   context 'Valid alphanumeric ISIN' do
